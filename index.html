@@ -3,49 +3,59 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Number Bingo - Kids</title>
+<title>Spooky Number Bingo - Halloween</title>
+<link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box}
-body{margin:0;min-height:100vh;font-family:"Trebuchet MS",Arial,sans-serif;background:linear-gradient(180deg,#72d7ff 0%,#dff8ff 48%,#fff 100%);overflow-x:hidden;color:#24415a}
+body{margin:0;min-height:100vh;font-family:"Trebuchet MS",Arial,sans-serif;background:linear-gradient(180deg,#160b30 0%,#2a1454 45%,#43206e 100%);overflow-x:hidden;color:#ffe9c9}
 body:before{content:"";position:fixed;inset:0;pointer-events:none;background:
-radial-gradient(circle at 8% 15%,#fff 0 18px,transparent 19px),
-radial-gradient(circle at 92% 20%,#fff8 0 25px,transparent 26px),
-radial-gradient(circle at 20% 85%,#fff8 0 20px,transparent 21px)}
-.wrap{max-width:1050px;margin:auto;padding:18px 14px 30px}
+radial-gradient(circle at 85% 10%,#fff7d6 0 34px,#ffe98a44 35px 55px,transparent 56px),
+radial-gradient(circle at 8% 18%,#ffffff0d 0 18px,transparent 19px),
+radial-gradient(circle at 20% 88%,#ffffff0a 0 20px,transparent 21px)}
+.deco{position:fixed;pointer-events:none;user-select:none;opacity:.45;z-index:0;animation:floaty 7s ease-in-out infinite alternate}
+@keyframes floaty{from{transform:translateY(0) rotate(-6deg)}to{transform:translateY(-28px) rotate(8deg)}}
+.wrap{position:relative;z-index:1;max-width:1050px;margin:auto;padding:18px 14px 30px}
 .top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.logo{font-size:clamp(30px,5vw,52px);font-weight:1000;color:#fff;text-shadow:0 4px 0 #287ba5,0 7px 12px #24608055;letter-spacing:1px}
-.controls{display:flex;gap:8px;flex-wrap:wrap}
-button,select{font:inherit;border:0;border-radius:16px;padding:12px 16px;font-weight:800;cursor:pointer;box-shadow:0 4px 0 #0002}
-button{background:#ffcf32;color:#533b00}
+.logo{font-family:'Creepster',cursive;font-size:clamp(34px,6vw,60px);color:#ff8c1a;text-shadow:0 4px 0 #5b1fa8,0 8px 16px #00000088;letter-spacing:2px}
+.controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+button,select{font:inherit;border:0;border-radius:16px;padding:12px 16px;font-weight:800;cursor:pointer;box-shadow:0 4px 0 #00000055}
+button{background:#ff8c1a;color:#3a1560}
 button:hover{transform:translateY(-2px)}
-select{background:white;color:#24415a}
-.card{background:#fffffff2;border:5px solid white;border-radius:28px;box-shadow:0 9px 0 #2276a52b,0 15px 30px #27657b25;margin-top:15px;padding:18px}
+select{background:#2b1b47;color:#ffd280;max-width:230px;border:2px solid #6a3fb5}
+.card{background:#241244aa;border:3px solid #7b4fc9;border-radius:28px;box-shadow:0 9px 0 #0d062088,0 15px 30px #00000066;margin-top:15px;padding:18px}
 .gamebar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;text-align:center}
-.label{font-size:13px;font-weight:900;color:#6990a6;letter-spacing:1px}
-.score{font-size:26px;font-weight:1000;color:#27749b}
+.label{font-size:13px;font-weight:900;color:#b79ae0;letter-spacing:1px}
+.score{font-size:26px;font-weight:1000;color:#ffd280}
+.livesRow{font-size:24px;letter-spacing:2px;min-height:30px}
+.livesRow.beat{animation:beat .4s}
+@keyframes beat{0%,100%{transform:scale(1)}50%{transform:scale(1.35)}}
 .bigNumber{font-size:clamp(55px,9vw,90px);font-weight:1000;line-height:1.15;min-width:150px}
 .bigNumber.talking{animation:talk .45s ease-in-out infinite alternate}
 @keyframes talk{from{transform:scale(1) rotate(-3deg)}to{transform:scale(1.15) rotate(4deg)}}
 .btnRow{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:6px}
-.callBtn{font-size:22px;padding:15px 24px;background:#55cf68;color:#fff;box-shadow:0 5px 0 #329947}
-.repeatBtn{background:#52b9e8;color:#fff;box-shadow:0 5px 0 #2f8db8}
-.message{text-align:center;font-size:22px;font-weight:900;min-height:34px;margin:5px 0 14px;color:#27749b}
+.callBtn{font-size:22px;padding:15px 24px;background:#57c84d;color:#123c10;box-shadow:0 5px 0 #2f8f2a}
+.repeatBtn{background:#52b9e8;color:#0d2f47;box-shadow:0 5px 0 #2f7fa8}
+.message{text-align:center;font-size:22px;font-weight:900;min-height:34px;margin:5px 0 14px;color:#ffd280}
 .board{max-width:650px;margin:auto;display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
-.cell{aspect-ratio:1;position:relative;border:4px solid #8dd8f5;border-radius:22px;background:linear-gradient(145deg,#fff,#eafaff);display:flex;align-items:center;justify-content:center;font-size:clamp(24px,5vw,42px);font-weight:1000;color:#26749b;cursor:pointer;user-select:none;box-shadow:0 5px 0 #8acbe1;transition:.15s}
-.cell:hover{transform:translateY(-4px) rotate(-1deg);background:#fffdf0}
-.cell.marked{background:linear-gradient(145deg,#68db77,#37b957);border-color:#239a42;color:#fff;box-shadow:0 5px 0 #238f3d;animation:pop .35s}
+.cell{aspect-ratio:1;position:relative;border:4px solid #7b4fc9;border-radius:22px;background:linear-gradient(145deg,#33205c,#241546);display:flex;align-items:center;justify-content:center;font-size:clamp(24px,5vw,42px);font-weight:1000;color:#ffb340;cursor:pointer;user-select:none;box-shadow:0 5px 0 #170c31;transition:.15s}
+.cell:hover{transform:translateY(-4px) rotate(-1deg);background:#3f2a6e}
+.cell.marked{background:linear-gradient(145deg,#8fe86e,#3fae3f);border-color:#2c8f2c;color:#fff;box-shadow:0 5px 0 #1f6b1f;animation:pop .35s}
 .cell.marked:after{content:"✓";position:absolute;right:6px;top:1px;font-size:22px;color:#fff}
-.cell.wrong{animation:shake .3s;border-color:#ff7777}
-.cell.winline{background:linear-gradient(145deg,#ffd85e,#ffb01f);border-color:#f0a500;color:#6b4400;box-shadow:0 5px 0 #d98f00;animation:sparkle .5s}
+.cell.wrong{animation:shake .3s;border-color:#ff5555;background:#4a1d3d}
+.cell.winline{background:linear-gradient(145deg,#ffd85e,#ff8c1a);border-color:#ff7b00;color:#4a1d00;box-shadow:0 5px 0 #d06a00;animation:sparkle .5s}
 @keyframes pop{0%{transform:scale(.75) rotate(-6deg)}70%{transform:scale(1.12) rotate(3deg)}100%{transform:scale(1)}}
 @keyframes shake{20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
 @keyframes sparkle{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
-.history{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;min-height:28px}
-.ball{width:35px;height:35px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;background:#277aa3;color:#fff}
 .levels{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
-.level{background:#edf8fc;color:#28749a;box-shadow:none;border:3px solid #bce7f5}
-.level.active{background:#ffcf32;border-color:#eab21b;color:#543e00}
-.stars{font-size:26px;letter-spacing:3px}
+.level{background:#2b1b47;color:#c9aef2;box-shadow:none;border:3px solid #6a3fb5}
+.level.active{background:#ff8c1a;border-color:#d96f00;color:#3a1560}
+#overlay{position:fixed;inset:0;background:#0a0518e0;display:none;align-items:center;justify-content:center;z-index:30;padding:16px}
+#overlay.show{display:flex}
+.overCard{background:#2b1650;border:4px solid #ff8c1a;border-radius:28px;padding:32px 26px;text-align:center;max-width:430px;box-shadow:0 15px 40px #000}
+.overTitle{font-family:'Creepster',cursive;font-size:54px;color:#ff8c1a;letter-spacing:2px;text-shadow:0 4px 0 #5b1fa8}
+.overGhost{font-size:60px;animation:floaty 2s ease-in-out infinite alternate}
+.overText{font-size:20px;font-weight:900;color:#ffd280;margin:10px 0 20px}
+.overBtn{font-size:22px;padding:15px 28px;background:#57c84d;color:#123c10;box-shadow:0 5px 0 #2f8f2a}
 #confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:10}
 .conf{position:absolute;width:12px;height:20px;top:-30px;animation:fall 2.4s linear forwards}
 @keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:.9}}
@@ -54,24 +64,41 @@ select{background:white;color:#24415a}
 </head>
 <body>
 <div id="confetti"></div>
+<span class="deco" style="left:4%;top:14%;font-size:46px">🦇</span>
+<span class="deco" style="right:6%;top:8%;font-size:40px;animation-delay:1.2s">👻</span>
+<span class="deco" style="left:12%;bottom:12%;font-size:38px;animation-delay:2s">🕷️</span>
+<span class="deco" style="right:10%;bottom:18%;font-size:52px;animation-delay:.6s">🎃</span>
+<span class="deco" style="left:45%;top:5%;font-size:34px;animation-delay:1.8s">🦇</span>
+<span class="deco" style="right:35%;bottom:6%;font-size:36px;animation-delay:2.6s">🕸️</span>
+
+<div id="overlay">
+  <div class="overCard">
+    <div class="overGhost">👻🎃👻</div>
+    <div class="overTitle">GAME OVER!</div>
+    <div class="overText">Oh no! You ran out of lives...<br>The ghosts got you! 💀</div>
+    <button class="overBtn" onclick="restartFromOver()">🔄 TRY AGAIN!</button>
+  </div>
+</div>
+
 <div class="wrap">
   <div class="top">
-    <div class="logo">🔢 NUMBER BINGO! ⭐</div>
+    <div class="logo">🎃 SPOOKY NUMBER BINGO! 👻</div>
     <div class="controls">
       <select id="level">
-        <option value="easy">🌱 Easy · 0–10</option>
-        <option value="medium" selected>🚀 Medium · 0–50</option>
-        <option value="hard">🏆 Hard · 0–100</option>
+        <option value="easy">🍬 Easy · 0–10</option>
+        <option value="medium" selected>🧟 Medium · 0–50</option>
+        <option value="hard">👹 Hard · 0–100</option>
       </select>
+      <select id="voiceSel" title="Choose the voice"><option>🎙 Voice…</option></select>
       <button onclick="newGame()">🔄 New Game</button>
     </div>
   </div>
 
   <div class="card">
     <div class="levels">
-      <button class="level active" id="easyBtn" onclick="setLevel('easy')">🌱 EASY</button>
-      <button class="level" id="mediumBtn" onclick="setLevel('medium')">🚀 MEDIUM</button>
-      <button class="level" id="hardBtn" onclick="setLevel('hard')">🏆 HARD</button>
+      <button class="level active" id="easyBtn" onclick="setLevel('easy')">🍬 EASY</button>
+      <button class="level" id="mediumBtn" onclick="setLevel('medium')">🧟 MEDIUM</button>
+      <button class="level" id="hardBtn" onclick="setLevel('hard')">👹 HARD</button>
     </div>
   </div>
 
@@ -86,23 +113,18 @@ select{background:white;color:#24415a}
           <button class="callBtn repeatBtn" onclick="repeatNumber()">🔊 AGAIN</button>
         </div>
       </div>
-      <div><div class="label">STARS</div><div class="stars" id="stars">☆☆☆☆☆</div></div>
+      <div><div class="label">LIVES</div><div class="livesRow" id="lives">❤️❤️❤️❤️❤️</div></div>
     </div>
   </div>
 
   <div class="card">
-    <div id="message" class="message">Click “CALL NUMBER!” to start! 🎉</div>
+    <div id="message" class="message">Click “CALL NUMBER!” to start... if you dare! 🎃</div>
     <div id="board" class="board"></div>
-  </div>
-
-  <div class="card">
-    <div class="label" style="text-align:center;margin-bottom:8px">NUMBERS CALLED</div>
-    <div id="history" class="history"></div>
   </div>
 </div>
 
 <script>
-let max=50,board=[],called=[],hits=0,gameOver=false,lastNumber=null,voiceObj=null;
+let max=50,board=[],called=[],hits=0,lives=5,gameOver=false,lastNumber=null,voiceObj=null;
 const levels={easy:10,medium:50,hard:100};
 
 function setLevel(l){
@@ -116,21 +138,28 @@ document.getElementById('level').onchange=e=>setLevel(e.target.value);
 function shuffle(a){for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function setMessage(t){document.getElementById('message').textContent=t}
 function setTalking(on){document.getElementById('speaker').classList.toggle('talking',on)}
+function renderLives(){
+  document.getElementById('lives').textContent='❤️'.repeat(lives)+'🖤'.repeat(5-lives);
+  const el=document.getElementById('lives');
+  el.classList.remove('beat');void el.offsetWidth;el.classList.add('beat');
+}
 
 function newGame(){
   max=levels[document.getElementById('level').value];
   const pool=Array.from({length:max+1},(_,i)=>i); // 0 fins a max
   board=pool.length>=25?shuffle([...pool]).slice(0,25)
                        :Array.from({length:25},()=>pool[Math.floor(Math.random()*pool.length)]);
-  called=[];hits=0;gameOver=false;lastNumber=null;
+  called=[];hits=0;lives=5;gameOver=false;lastNumber=null;
+  document.getElementById('overlay').classList.remove('show');
   if('speechSynthesis' in window)speechSynthesis.cancel();
   setTalking(false);
   document.getElementById('speaker').textContent='👂';
   document.getElementById('count').textContent='0';
-  document.getElementById('stars').textContent='☆☆☆☆☆';
-  setMessage('Click “CALL NUMBER!” to start! 🎉');
-  renderBoard();renderHistory();
+  document.getElementById('lives').textContent='❤️❤️❤️❤️❤️';
+  setMessage('Click “CALL NUMBER!” to start... if you dare! 🎃');
+  renderBoard();
 }
+function restartFromOver(){newGame()}
 
 function renderBoard(){
   const b=document.getElementById('board');b.innerHTML='';
@@ -144,8 +173,11 @@ function mark(i,d){
   const n=board[i];
   if(!called.includes(n)){
     d.classList.remove('wrong');void d.offsetWidth;d.classList.add('wrong');
+    lives--;renderLives();
     playSound('bad');
-    setMessage('Oops! That number has not been called yet! 👂');
+    if(lives<=0){doGameOver();return}
+    speak('Oh no!');
+    setMessage('👻 Boo! That number was not called! You lost a life! ('+lives+' left)');
     return;
   }
   const cells=[...document.querySelectorAll('.cell')];
@@ -153,10 +185,8 @@ function mark(i,d){
   if(!targets.length){setMessage('You already found that one! 😉');return}
   targets.forEach(c=>c.classList.add('marked'));
   hits+=targets.length;
-  const f=Math.min(5,Math.ceil(hits/3));
-  document.getElementById('stars').textContent='★'.repeat(f)+'☆'.repeat(5-f);
   playSound('good');
-  const cheers=['Great job!','Well done!','Awesome!','Super!','Fantastic!'];
+  const cheers=['Great job!','Boo-tiful!','Spooktastic!','Awesome!','Fang-tastic!'];
   speak(cheers[Math.floor(Math.random()*cheers.length)]);
   const line=getBingoLine();
   if(line)win(line);
@@ -164,19 +194,25 @@ function mark(i,d){
 }
 function getBingoLine(){
   const c=[...document.querySelectorAll('.cell')],lines=[];
-  for(let r=0;r<5;r++)lines.push([0,1,2,3,4].map(x=>r*5+x));      // horizontals
-  for(let x=0;x<5;x++)lines.push([0,1,2,3,4].map(r=>r*5+x));      // verticals
-  lines.push([0,6,12,18,24],[4,8,12,16,20]);                      // diagonals
+  for(let r=0;r<5;r++)lines.push([0,1,2,3,4].map(x=>r*5+x));
+  for(let x=0;x<5;x++)lines.push([0,1,2,3,4].map(r=>r*5+x));
+  lines.push([0,6,12,18,24],[4,8,12,16,20]);
   return lines.find(line=>line.every(i=>c[i].classList.contains('marked')));
 }
 function win(line){
   gameOver=true;
   const cells=[...document.querySelectorAll('.cell')];
   line.forEach(i=>cells[i].classList.add('winline'));
-  setMessage('🎉🎉 BINGO! YOU DID IT! 🎉🎉');
-  document.getElementById('stars').textContent='★★★★★';
-  playSound('win');speak('Bingo! You did it!');
+  setMessage('🎉🎃 BINGO! YOU ESCAPED THE HAUNTED HOUSE! 🎃🎉');
+  playSound('win');speak('Bingo! You escaped the haunted house! Spooktastic!');
   confetti();
+}
+function doGameOver(){
+  gameOver=true;
+  setMessage('💀 GAME OVER! You ran out of lives...');
+  playSound('lose');
+  speak('Oh no! The ghosts got you! Try again!');
+  document.getElementById('overlay').classList.add('show');
 }
 function callNumber(){
   if(gameOver)return;
@@ -186,39 +222,50 @@ function callNumber(){
   called.push(n);lastNumber=n;
   document.getElementById('count').textContent=called.length;
   setMessage('👂 Listen carefully and find it on your card!');
-  renderHistory();playSound('call');speakNumber(n);
+  playSound('call');speakNumber(n);
 }
 function repeatNumber(){
-  if(lastNumber===null)return;
+  if(gameOver||lastNumber===null)return;
   speakNumber(lastNumber);
-}
-function renderHistory(){
-  const h=document.getElementById('history');h.innerHTML='';
-  called.forEach(n=>{let d=document.createElement('div');d.className='ball';d.textContent=n;h.appendChild(d)});
 }
 
 /* ---- Veu ---- */
-function pickVoice(){
+function fillVoices(){
   if(!('speechSynthesis' in window))return;
-  const vs=speechSynthesis.getVoices();
+  const sel=document.getElementById('voiceSel');
+  const saved=localStorage.getItem('bingoVoice')||'';
+  let vs=speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang));
+  if(!vs.length)vs=speechSynthesis.getVoices();
   if(!vs.length)return;
-  let pool=vs.filter(v=>/^en/i.test(v.lang));
-  if(!pool.length)pool=vs;
-  voiceObj=pool.find(v=>/child|kid|junior/i.test(v.name))
-        ||pool.find(v=>/samantha|karen|moira|tessa|fiona|zira|susan|victoria|allison|ava|serena|google uk english female|google us english/i.test(v.name))
-        ||pool.find(v=>/female/i.test(v.name))
-        ||pool[0];
+  sel.innerHTML='';
+  vs.forEach(v=>{
+    const o=document.createElement('option');
+    o.value=v.name;
+    o.textContent='🎙 '+v.name.replace(/^(Microsoft|Google)\s*/,'').replace(/ - .*$/,'')+' ('+v.lang+')';
+    sel.appendChild(o);
+  });
+  let choice=vs.find(v=>v.name===saved);
+  if(!choice)choice=vs.find(v=>/child|kid|junior/i.test(v.name))
+           ||vs.find(v=>/female|zira|susan|samantha|karen|moira|tessa|fiona|allison|ava|serena|victoria/i.test(v.name))
+           ||vs[0];
+  sel.value=choice.name;
+  voiceObj=choice;
 }
-pickVoice();
+document.getElementById('voiceSel').onchange=e=>{
+  const vs=('speechSynthesis' in window)?speechSynthesis.getVoices():[];
+  voiceObj=vs.find(v=>v.name===e.target.value)||null;
+  localStorage.setItem('bingoVoice',e.target.value);
+  speak('Hello! I am your spooky bingo friend!');
+};
 if('speechSynthesis' in window){
-  speechSynthesis.onvoiceschanged=pickVoice;
-  setTimeout(pickVoice,300);setTimeout(pickVoice,1500);
+  speechSynthesis.onvoiceschanged=fillVoices;
+  fillVoices();setTimeout(fillVoices,300);setTimeout(fillVoices,1500);
 }
 function utter(text){
   const u=new SpeechSynthesisUtterance(text);
-  if(!voiceObj)pickVoice();
+  if(!voiceObj)fillVoices();
   if(voiceObj){u.voice=voiceObj;u.lang=voiceObj.lang}else u.lang='en-US';
-  u.rate=.8;u.pitch=1.4;u.volume=1;
+  u.rate=.75;u.pitch=1.8;u.volume=1;
   return u;
 }
 function speakNumber(n){
@@ -228,7 +275,7 @@ function speakNumber(n){
   const u1=utter(String(n)),u2=utter(String(n));
   u2.onend=()=>setTalking(false);
   speechSynthesis.speak(u1);speechSynthesis.speak(u2);
-  setTimeout(()=>setTalking(false),5000);
+  setTimeout(()=>setTalking(false),6000);
 }
 function speak(text){
   if(!('speechSynthesis' in window))return;
@@ -249,14 +296,16 @@ function tone(freq,dur,type='sine',vol=.07){
 function playSound(kind){
   if(kind==='call'){tone(520,.08,'triangle');setTimeout(()=>tone(700,.1,'triangle'),90)}
   if(kind==='good'){tone(660,.08);setTimeout(()=>tone(880,.12),90)}
-  if(kind==='bad'){tone(180,.18,'sawtooth',.045)}
+  if(kind==='bad'){tone(300,.15,'sawtooth',.06);setTimeout(()=>tone(200,.25,'sawtooth',.06),150)}
   if(kind==='win'){[523,659,784,1047].forEach((f,i)=>setTimeout(()=>tone(f,.18,'triangle'),i*110))}
+  if(kind==='lose'){[400,320,250,170].forEach((f,i)=>setTimeout(()=>tone(f,.28,'sawtooth',.055),i*170))}
 }
 function confetti(){
   const box=document.getElementById('confetti');box.innerHTML='';
   for(let i=0;i<100;i++){
     const d=document.createElement('div');d.className='conf';
-    d.style.left=Math.random()*100+'%';d.style.background=['#ffcf32','#55cf68','#ff6f91','#52b9e8','#a875ff'][Math.floor(Math.random()*5)];
+    d.style.left=Math.random()*100+'%';
+    d.style.background=['#ff8c1a','#a875ff','#7ddf64','#ff4fa0','#ffe98a'][Math.floor(Math.random()*5)];
     d.style.transform='rotate('+Math.random()*360+'deg)';
     d.style.animationDelay=Math.random()*.7+'s';box.appendChild(d);
   }
