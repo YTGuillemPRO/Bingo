@@ -35,6 +35,14 @@ select{background:#2b1b47;color:#ffd280;max-width:230px;border:2px solid #6a3fb5
 .btnRow{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:6px}
 .callBtn{font-size:22px;padding:15px 24px;background:#57c84d;color:#123c10;box-shadow:0 5px 0 #2f8f2a}
 .repeatBtn{background:#52b9e8;color:#0d2f47;box-shadow:0 5px 0 #2f7fa8}
+.statsBar{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px}
+.pill{background:#1c0e38;border:2px solid #6a3fb5;border-radius:999px;padding:7px 14px;font-weight:900;font-size:15px;color:#c9aef2;display:flex;align-items:center;gap:6px;box-shadow:0 3px 0 #00000055}
+.pill b{color:#ffd280;font-size:17px}
+.pill.fire{border-color:#ff8c1a;background:#3d1c05;animation:firePulse .55s ease-in-out infinite alternate}
+.pill.fire b{color:#ffb340}
+@keyframes firePulse{from{transform:scale(1);box-shadow:0 3px 0 #00000055}to{transform:scale(1.1);box-shadow:0 0 20px #ff8c1a99}}
+.hintBtn{background:#ffe98a;color:#5b3a00;box-shadow:0 4px 0 #b8963a;padding:9px 14px;font-size:15px}
+.soundBtn{background:#52b9e8;color:#0d2f47;box-shadow:0 4px 0 #2f7fa8;padding:9px 13px;font-size:16px}
 .message{text-align:center;font-size:22px;font-weight:900;min-height:34px;margin:5px 0 14px;color:#ffd280}
 .board{max-width:650px;margin:auto;display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
 .cell{aspect-ratio:1;position:relative;border:4px solid #7b4fc9;border-radius:22px;background:linear-gradient(145deg,#33205c,#241546);display:flex;align-items:center;justify-content:center;font-size:clamp(24px,5vw,42px);font-weight:1000;color:#ffb340;cursor:pointer;user-select:none;box-shadow:0 5px 0 #170c31;transition:.15s}
@@ -43,23 +51,37 @@ select{background:#2b1b47;color:#ffd280;max-width:230px;border:2px solid #6a3fb5
 .cell.marked:after{content:"✓";position:absolute;right:6px;top:1px;font-size:22px;color:#fff}
 .cell.wrong{animation:shake .3s;border-color:#ff5555;background:#4a1d3d}
 .cell.winline{background:linear-gradient(145deg,#ffd85e,#ff8c1a);border-color:#ff7b00;color:#4a1d00;box-shadow:0 5px 0 #d06a00;animation:sparkle .5s}
+.cell.hintGlow{border-color:#ffe98a;background:linear-gradient(145deg,#6b4a12,#4a3006);box-shadow:0 0 0 4px #ffe98a55,0 0 28px 10px #ffd85ecc;animation:hintPulse .45s ease-in-out infinite alternate;z-index:2}
+@keyframes hintPulse{from{transform:scale(1)}to{transform:scale(1.1)}}
 @keyframes pop{0%{transform:scale(.75) rotate(-6deg)}70%{transform:scale(1.12) rotate(3deg)}100%{transform:scale(1)}}
 @keyframes shake{20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
 @keyframes sparkle{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
 .levels{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
 .level{background:#2b1b47;color:#c9aef2;box-shadow:none;border:3px solid #6a3fb5}
 .level.active{background:#ff8c1a;border-color:#d96f00;color:#3a1560}
+.pumpkin{position:fixed;z-index:25;font-size:56px;line-height:1;cursor:pointer;user-select:none;filter:drop-shadow(0 0 16px #ff8c1acc);animation:pumpFloat .7s ease-in-out infinite alternate}
+.pumpkin:hover{filter:drop-shadow(0 0 24px #ffd85e);transform:scale(1.18)}
+.pumpkin.bye{opacity:0;transition:opacity .5s}
+@keyframes pumpFloat{from{transform:translateY(0) rotate(-8deg)}to{transform:translateY(-18px) rotate(8deg)}}
+.popPoints{position:fixed;z-index:40;pointer-events:none;font-weight:1000;font-size:24px;color:#ffe98a;text-shadow:0 2px 0 #00000099,0 0 14px #ff8c1a;animation:riseFade 1.1s ease-out forwards}
+@keyframes riseFade{from{opacity:1;transform:translateY(0) scale(.7)}30%{transform:translateY(-26px) scale(1.2)}to{opacity:0;transform:translateY(-70px) scale(1)}}
+.shakeScreen{animation:scrShake .5s}
+@keyframes scrShake{20%,60%{transform:translateX(-12px)}40%,80%{transform:translateX(12px)}}
 #overlay{position:fixed;inset:0;background:#0a0518e0;display:none;align-items:center;justify-content:center;z-index:30;padding:16px}
 #overlay.show{display:flex}
-.overCard{background:#2b1650;border:4px solid #ff8c1a;border-radius:28px;padding:32px 26px;text-align:center;max-width:430px;box-shadow:0 15px 40px #000}
+.overCard{background:#2b1650;border:4px solid #ff8c1a;border-radius:28px;padding:32px 26px;text-align:center;max-width:460px;box-shadow:0 15px 40px #000}
 .overTitle{font-family:'Creepster',cursive;font-size:54px;color:#ff8c1a;letter-spacing:2px;text-shadow:0 4px 0 #5b1fa8}
-.overGhost{font-size:60px;animation:floaty 2s ease-in-out infinite alternate}
-.overText{font-size:20px;font-weight:900;color:#ffd280;margin:10px 0 20px}
-.overBtn{font-size:22px;padding:15px 28px;background:#57c84d;color:#123c10;box-shadow:0 5px 0 #2f8f2a}
+.overTitle.bingo{color:#57c84d;text-shadow:0 4px 0 #1f6b1f}
+.overGhost{font-size:56px;animation:floaty 2s ease-in-out infinite alternate}
+.overText{font-size:19px;font-weight:900;color:#ffd280;margin:10px 0 6px;line-height:1.5}
+.overStats{font-size:16px;font-weight:800;color:#c9aef2;margin:10px 0 4px;line-height:1.8}
+.record{color:#ffe98a;animation:beat .5s infinite alternate;font-size:21px;margin:6px 0}
+.overBtn{font-size:22px;padding:15px 28px;background:#57c84d;color:#123c10;box-shadow:0 5px 0 #2f8f2a;margin-top:10px}
 #confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:10}
 .conf{position:absolute;width:12px;height:20px;top:-30px;animation:fall 2.4s linear forwards}
+.conf.emoji{width:auto;height:auto;font-size:22px}
 @keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:.9}}
-@media(max-width:650px){.gamebar{grid-template-columns:1fr}.bigNumber{min-width:0}.card{padding:12px}.board{gap:6px}.cell{border-width:3px;border-radius:15px}}
+@media(max-width:650px){.gamebar{grid-template-columns:1fr}.bigNumber{min-width:0}.card{padding:12px}.board{gap:6px}.cell{border-width:3px;border-radius:15px}.message{font-size:18px}}
 </style>
 </head>
 <body>
@@ -73,14 +95,14 @@ select{background:#2b1b47;color:#ffd280;max-width:230px;border:2px solid #6a3fb5
 
 <div id="overlay">
   <div class="overCard">
-    <div class="overGhost">👻🎃👻</div>
-    <div class="overTitle">GAME OVER!</div>
-    <div class="overText">Oh no! You ran out of lives...<br>The ghosts got you! 💀</div>
-    <button class="overBtn" onclick="restartFromOver()">🔄 TRY AGAIN!</button>
+    <div class="overGhost" id="overGhost">👻🎃👻</div>
+    <div class="overTitle" id="overTitle">GAME OVER!</div>
+    <div class="overText" id="overText">Oh no! You ran out of lives...<br>The ghosts got you! 💀</div>
+    <button class="overBtn" id="overBtn" onclick="restartFromOver()">🔄 TRY AGAIN!</button>
   </div>
 </div>
 
-<div class="wrap">
+<div class="wrap" id="wrap">
   <div class="top">
     <div class="logo">🎃 SPOOKY NUMBER BINGO! 👻</div>
     <div class="controls">
@@ -115,6 +137,14 @@ select{background:#2b1b47;color:#ffd280;max-width:230px;border:2px solid #6a3fb5
       </div>
       <div><div class="label">LIVES</div><div class="livesRow" id="lives">❤️❤️❤️❤️❤️</div></div>
     </div>
+    <div class="statsBar">
+      <span class="pill">⭐ <b id="score">0</b></span>
+      <span class="pill">🏆 <b id="best">0</b></span>
+      <span class="pill" id="streakPill">🔥 <b id="streak">0</b></span>
+      <span class="pill">🕯️ <b id="hints">3</b></span>
+      <button class="hintBtn" onclick="useHint()" title="Lights up the last called number">🕯️ HINT</button>
+      <button class="soundBtn" id="soundBtn" onclick="toggleSound()" title="Sound effects on/off">🔊</button>
+    </div>
   </div>
 
   <div class="card">
@@ -125,6 +155,9 @@ select{background:#2b1b47;color:#ffd280;max-width:230px;border:2px solid #6a3fb5
 
 <script>
 let max=50,board=[],called=[],hits=0,lives=5,gameOver=false,lastNumber=null,voiceObj=null;
+let score=0,streak=0,bestStreak=0,hints=3,pumpkinAlive=false,overTimer=null;
+let best=parseInt(localStorage.getItem('bingoBest')||'0',10)||0;
+let soundOn=localStorage.getItem('bingoSfx')!=='off';
 const levels={easy:10,medium:50,hard:100};
 
 function setLevel(l){
@@ -143,6 +176,13 @@ function renderLives(){
   const el=document.getElementById('lives');
   el.classList.remove('beat');void el.offsetWidth;el.classList.add('beat');
 }
+function renderStats(){
+  document.getElementById('score').textContent=score;
+  document.getElementById('best').textContent=best;
+  document.getElementById('streak').textContent=streak;
+  document.getElementById('hints').textContent=hints;
+  document.getElementById('streakPill').classList.toggle('fire',streak>=3);
+}
 
 function newGame(){
   max=levels[document.getElementById('level').value];
@@ -150,12 +190,15 @@ function newGame(){
   board=pool.length>=25?shuffle([...pool]).slice(0,25)
                        :Array.from({length:25},()=>pool[Math.floor(Math.random()*pool.length)]);
   called=[];hits=0;lives=5;gameOver=false;lastNumber=null;
+  score=0;streak=0;bestStreak=0;hints=3;pumpkinAlive=false;
+  if(overTimer){clearTimeout(overTimer);overTimer=null}
+  document.querySelectorAll('.pumpkin').forEach(p=>p.remove());
   document.getElementById('overlay').classList.remove('show');
   if('speechSynthesis' in window)speechSynthesis.cancel();
   setTalking(false);
   document.getElementById('speaker').textContent='👂';
   document.getElementById('count').textContent='0';
-  document.getElementById('lives').textContent='❤️❤️❤️❤️❤️';
+  renderLives();renderStats();
   setMessage('Click “CALL NUMBER!” to start... if you dare! 🎃');
   renderBoard();
 }
@@ -168,12 +211,60 @@ function renderBoard(){
     d.onclick=()=>mark(i,d);b.appendChild(d);
   });
 }
+
+function popPoints(txt,x,y){
+  const d=document.createElement('div');d.className='popPoints';d.textContent=txt;
+  d.style.left=x;d.style.top=y;document.body.appendChild(d);
+  setTimeout(()=>d.remove(),1200);
+}
+
+/* ---- Magic pumpkin bonus ---- */
+function maybePumpkin(){
+  if(pumpkinAlive||Math.random()>.22)return;
+  pumpkinAlive=true;
+  const p=document.createElement('div');p.className='pumpkin';p.textContent='🎃';
+  p.style.left=(8+Math.random()*74)+'vw';
+  p.style.top=(12+Math.random()*62)+'vh';
+  p.onclick=()=>{
+    if(!pumpkinAlive)return;
+    pumpkinAlive=false;p.remove();
+    playSound('bonus');
+    if(lives<5){
+      lives++;renderLives();
+      popPoints('+1 ❤️',p.style.left,p.style.top);
+      setMessage('🎁 MAGIC PUMPKIN! You got an extra life! ❤️');
+    }else{
+      score+=50;renderStats();
+      popPoints('+50 ⭐',p.style.left,p.style.top);
+      setMessage('🎁 MAGIC PUMPKIN! +50 points!');
+    }
+    speak('Magic pumpkin!');
+  };
+  document.body.appendChild(p);
+  setTimeout(()=>p.classList.add('bye'),3400);
+  setTimeout(()=>{if(p.parentNode)p.remove();pumpkinAlive=false},4000);
+}
+
+/* ---- Candle hint ---- */
+function useHint(){
+  if(gameOver)return;
+  if(hints<=0){setMessage('🕯️💔 No candles left! Save them for the next game!');return}
+  if(lastNumber===null){setMessage('Call a number first! 🎲');return}
+  const cells=[...document.querySelectorAll('.cell')];
+  const targets=cells.filter((c,i)=>board[i]===lastNumber&&!c.classList.contains('marked'));
+  if(!targets.length){setMessage('You already marked that one! 😉');return}
+  hints--;renderStats();
+  targets.forEach(c=>{c.classList.add('hintGlow');setTimeout(()=>c.classList.remove('hintGlow'),1800)});
+  playSound('hint');
+  setMessage('🕯️ The candle glows on the mystery number... quick, mark it!');
+}
+
 function mark(i,d){
   if(gameOver)return;
   const n=board[i];
   if(!called.includes(n)){
     d.classList.remove('wrong');void d.offsetWidth;d.classList.add('wrong');
-    lives--;renderLives();
+    lives--;streak=0;renderLives();renderStats();
     playSound('bad');
     if(lives<=0){doGameOver();return}
     speak('Oh no!');
@@ -185,13 +276,26 @@ function mark(i,d){
   if(!targets.length){setMessage('You already found that one! 😉');return}
   targets.forEach(c=>c.classList.add('marked'));
   hits+=targets.length;
+  streak++;bestStreak=Math.max(bestStreak,streak);
+  const pts=10+Math.min(streak-1,5)*2;
+  score+=pts;
+  const r=d.getBoundingClientRect();
+  popPoints('+'+pts+' ⭐',Math.max(4,r.left+r.width/2-26)+'px',Math.max(4,r.top-8)+'px');
   playSound('good');
-  const cheers=['Great job!','Boo-tiful!','Spooktastic!','Awesome!','Fang-tastic!'];
-  speak(cheers[Math.floor(Math.random()*cheers.length)]);
+  if(streak===5)speak('Amazing! Five in a row! You are on fire!');
+  else if(streak===8)speak('Incredible! Eight in a row! Unstoppable!');
+  else{
+    const cheers=['Great job!','Boo-tiful!','Spooktastic!','Awesome!','Fang-tastic!'];
+    speak(cheers[Math.floor(Math.random()*cheers.length)]);
+  }
+  renderStats();
+  maybePumpkin();
   const line=getBingoLine();
   if(line)win(line);
+  else if(streak>=3)setMessage('🔥 '+streak+' IN A ROW! The ghosts are impressed!');
   else setMessage('⭐ Great! Listen for the next number!');
 }
+
 function getBingoLine(){
   const c=[...document.querySelectorAll('.cell')],lines=[];
   for(let r=0;r<5;r++)lines.push([0,1,2,3,4].map(x=>r*5+x));
@@ -199,29 +303,71 @@ function getBingoLine(){
   lines.push([0,6,12,18,24],[4,8,12,16,20]);
   return lines.find(line=>line.every(i=>c[i].classList.contains('marked')));
 }
+
 function win(line){
   gameOver=true;
   const cells=[...document.querySelectorAll('.cell')];
   line.forEach(i=>cells[i].classList.add('winline'));
+  document.querySelectorAll('.pumpkin').forEach(p=>p.remove());pumpkinAlive=false;
+  const lifeBonus=lives*20;
+  score+=lifeBonus;renderStats();
   setMessage('🎉🎃 BINGO! YOU ESCAPED THE HAUNTED HOUSE! 🎃🎉');
   playSound('win');speak('Bingo! You escaped the haunted house! Spooktastic!');
-  confetti();
+  confetti();emojiConfetti();
+  const isRecord=score>best;
+  if(isRecord){best=score;localStorage.setItem('bingoBest',best);renderStats()}
+  overTimer=setTimeout(()=>{overTimer=null;showOverlay(true,lifeBonus,isRecord)},1500);
 }
+
 function doGameOver(){
-  gameOver=true;
+  gameOver=true;streak=0;renderStats();
+  document.querySelectorAll('.pumpkin').forEach(p=>p.remove());pumpkinAlive=false;
   setMessage('💀 GAME OVER! You ran out of lives...');
   playSound('lose');
   speak('Oh no! The ghosts got you! Try again!');
+  document.getElementById('wrap').classList.add('shakeScreen');
+  const isRecord=score>best;
+  if(isRecord){best=score;localStorage.setItem('bingoBest',best)}
+  overTimer=setTimeout(()=>{overTimer=null;document.getElementById('wrap').classList.remove('shakeScreen');showOverlay(false,0,isRecord)},700);
+}
+
+function showOverlay(won,lifeBonus,isRecord){
+  const g=document.getElementById('overGhost'),t=document.getElementById('overTitle'),
+        x=document.getElementById('overText'),b=document.getElementById('overBtn');
+  if(won){
+    g.textContent='🏆🎃👻';
+    t.textContent='BINGO!';t.classList.add('bingo');
+    x.innerHTML='You escaped the haunted house!'
+      +'<div class="overStats">⭐ Score: '+score+' &nbsp;·&nbsp; 🎲 Calls: '+called.length
+      +' &nbsp;·&nbsp; 🔥 Best streak: '+bestStreak
+      +(lifeBonus>0?'<br>❤️ Lives bonus: +'+lifeBonus:'')+'</div>'
+      +(isRecord?'<div class="record">🎉 NEW RECORD! 🎉</div>':'');
+    b.textContent='🔄 PLAY AGAIN!';
+  }else{
+    g.textContent='👻💀🎃';
+    t.textContent='GAME OVER!';t.classList.remove('bingo');
+    x.innerHTML='Oh no! You ran out of lives...<br>The ghosts got you! 💀'
+      +'<div class="overStats">⭐ Score: '+score+' &nbsp;·&nbsp; 🎲 Calls: '+called.length
+      +' &nbsp;·&nbsp; 🔥 Best streak: '+bestStreak+'</div>'
+      +(isRecord?'<div class="record">🎉 NEW RECORD! 🎉</div>':'');
+    b.textContent='🔄 TRY AGAIN!';
+  }
   document.getElementById('overlay').classList.add('show');
 }
+
 function callNumber(){
   if(gameOver)return;
-  const remaining=Array.from({length:max+1},(_,i)=>i).filter(n=>!called.includes(n));
-  if(!remaining.length){setMessage('All the numbers have been called! 🔍');return}
-  const n=remaining[Math.floor(Math.random()*remaining.length)];
+  const cells=[...document.querySelectorAll('.cell')];
+  const marked=new Set();
+  cells.forEach((c,i)=>{if(c.classList.contains('marked'))marked.add(board[i])});
+  const avail=[...new Set(board)].filter(n=>!marked.has(n)); // siempre disponible en tu cartón
+  const fresh=avail.filter(n=>!called.includes(n));
+  const pool=fresh.length?fresh:avail;
+  if(!pool.length){setMessage('🌟 WOW! Every number on your card is done! 🌟');return}
+  const n=pool[Math.floor(Math.random()*pool.length)];
   called.push(n);lastNumber=n;
   document.getElementById('count').textContent=called.length;
-  setMessage('👂 Listen carefully and find it on your card!');
+  setMessage('👂 Listen! The mystery number IS on your card... find it!');
   playSound('call');speakNumber(n);
 }
 function repeatNumber(){
@@ -286,6 +432,7 @@ function speak(text){
 /* ---- So i confeti ---- */
 let audioCtx;
 function tone(freq,dur,type='sine',vol=.07){
+  if(!soundOn)return;
   try{
     audioCtx=audioCtx||new (window.AudioContext||window.webkitAudioContext)();
     const o=audioCtx.createOscillator(),g=audioCtx.createGain();
@@ -299,6 +446,14 @@ function playSound(kind){
   if(kind==='bad'){tone(300,.15,'sawtooth',.06);setTimeout(()=>tone(200,.25,'sawtooth',.06),150)}
   if(kind==='win'){[523,659,784,1047].forEach((f,i)=>setTimeout(()=>tone(f,.18,'triangle'),i*110))}
   if(kind==='lose'){[400,320,250,170].forEach((f,i)=>setTimeout(()=>tone(f,.28,'sawtooth',.055),i*170))}
+  if(kind==='bonus'){[660,880,1100,1320].forEach((f,i)=>setTimeout(()=>tone(f,.14,'triangle',.09),i*90))}
+  if(kind==='hint'){tone(980,.12,'sine',.05);setTimeout(()=>tone(1240,.16,'sine',.05),130)}
+}
+function toggleSound(){
+  soundOn=!soundOn;
+  localStorage.setItem('bingoSfx',soundOn?'on':'off');
+  document.getElementById('soundBtn').textContent=soundOn?'🔊':'🔇';
+  if(soundOn)playSound('good');
 }
 function confetti(){
   const box=document.getElementById('confetti');box.innerHTML='';
@@ -311,6 +466,20 @@ function confetti(){
   }
   setTimeout(()=>box.innerHTML='',3500);
 }
+function emojiConfetti(){
+  const box=document.getElementById('confetti');
+  const em=['🎃','👻','🦇','⭐','🍬','🕯️'];
+  for(let i=0;i<44;i++){
+    const d=document.createElement('div');d.className='conf emoji';
+    d.textContent=em[Math.floor(Math.random()*em.length)];
+    d.style.left=Math.random()*100+'%';
+    d.style.fontSize=(15+Math.random()*20)+'px';
+    d.style.animationDelay=(Math.random()*.5)+'s';
+    d.style.animationDuration=(1.8+Math.random()*.9)+'s';
+    box.appendChild(d);
+  }
+}
+document.getElementById('soundBtn').textContent=soundOn?'🔊':'🔇';
 newGame();
 </script>
 </body>
